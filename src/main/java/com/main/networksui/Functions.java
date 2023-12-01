@@ -6,8 +6,14 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 public class Functions {
 
@@ -43,4 +49,11 @@ public class Functions {
         chatVBox.getChildren().add(messagePane);
     }
 
+    public static void sendUDP(String message,String ip, int port) throws IOException {
+        DatagramSocket ds = new DatagramSocket();
+        byte[] buf;
+        buf = message.getBytes();
+        DatagramPacket DpSend = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip), port);
+        ds.send(DpSend);
+    }
 }
