@@ -1,6 +1,7 @@
 package com.main.networksui;
 
 import javafx.application.Platform;
+import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -24,6 +25,7 @@ public class Functions {
 
     public static void addMessage(String text, boolean sent) {
 
+        Long timestamp = new Date().getTime();
         VBox chatVBox = (VBox) Controller.currentStage.getScene().lookup("#chatVBox");
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a"); // DD for date, E for day name
         Pane messagePane = new Pane();
@@ -32,15 +34,25 @@ public class Functions {
         StackPane dateStackPane = new StackPane();
         Text messageText = new Text();
         Text messageDate = new Text();
+        Button deleteMessageButton = new Button();
 
-        messageDate.setText(dateFormat.format(new Date().getTime()));
+        messageHBox.setId(timestamp.toString());
+
+
+        deleteMessageButton.setOnAction(event -> {
+            Functions.deleteMessage(messageHBox.getId());
+        });
+
+        deleteMessageButton.getStyleClass().add("deleteMessageButton");
+
+        messageDate.setText(dateFormat.format(timestamp));
         messageDate.getStyleClass().add("messageDateText");
 
         dateStackPane.getStyleClass().add("messageDatePane");
         dateStackPane.getChildren().add(messageDate);
 
         messageText.setText(text);
-        messageText.setWrappingWidth(210);
+        messageText.setWrappingWidth(sent? 185: 210);
         messageText.getStyleClass().add("messageContentText");
 
         textStackPane.getStyleClass().add("messageContentPane");
@@ -48,10 +60,14 @@ public class Functions {
         textStackPane.getChildren().add(messageText);
 
         messageHBox.getChildren().add(sent ? textStackPane:dateStackPane);
+        if(sent) messageHBox.getChildren().add(deleteMessageButton);
         messageHBox.getChildren().add(sent ? dateStackPane:textStackPane);
 
         messagePane.getChildren().add(messageHBox);
         chatVBox.getChildren().add(messagePane);
+    }
+    public static void deleteMessage(String id) {
+        System.out.println(id);
     }
 
     public static ArrayList<String> getInterfaces(){

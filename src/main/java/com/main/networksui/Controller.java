@@ -53,15 +53,15 @@ public class Controller implements Initializable {
             });
         }
         localPortField.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*") || newValue.length() > 5) {
-                    localPortField.setText(newValue.replaceAll("[^\\d]", ""));
-                    if(newValue.length() > 4) {
-                        localPortField.setText(oldValue);
-                    }
-
-                } else if(!newValue.isEmpty()) {
-                    ReceiverUDP.updatePort(Integer.parseInt(newValue));
+            if (!newValue.matches("\\d*") || newValue.length() > 5) {
+                localPortField.setText(newValue.replaceAll("[^\\d]", ""));
+                if(newValue.length() > 4) {
+                    localPortField.setText(oldValue);
                 }
+
+            } else if(!newValue.isEmpty()) {
+                ReceiverUDP.updatePort(Integer.parseInt(newValue));
+            }
         });
 
         /*      ComboBox initialize   */
