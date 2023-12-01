@@ -9,14 +9,14 @@ import java.net.SocketAddress;
 import java.net.SocketException;
 
 public class ReceiverUDP {
-    private static int listeningPort = 1234;
+    private static int listeningPort;
     private static DatagramSocket datagramSocket;
 
     private static Thread mainThread;
 
     static {
         try {
-            datagramSocket = new DatagramSocket(listeningPort);
+            datagramSocket = new DatagramSocket();
         } catch (SocketException e) {
             throw new RuntimeException(e);
         }
