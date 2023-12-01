@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -111,31 +110,26 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="serverIPField" layoutX="558.0" layoutY="31.0" prefHeight="26.0" prefWidth="106.0" />
-      <TextField fx:id="serverPortField" layoutX="558.0" layoutY="66.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="TCPServerIPField" layoutX="558.0" layoutY="31.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="TCPServerPortField" layoutX="558.0" layoutY="66.0" prefHeight="26.0" prefWidth="106.0" />
       <Label layoutX="448.0" layoutY="105.0" text="Available Interfaces">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <MenuButton layoutX="447.0" layoutY="134.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" text="MenuButton">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Action 1" />
-          <MenuItem mnemonicParsing="false" text="Action 2" />
-        </items>
-      </MenuButton>
+      <MenuButton fx:id="interfacesMenuButton" layoutX="447.0" layoutY="134.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="222.0" />
       <Label layoutX="448.0" layoutY="187.0" text="Local IP:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="533.0" layoutY="184.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="localIPField" disable="true" layoutX="533.0" layoutY="184.0" prefHeight="26.0" prefWidth="106.0" />
       <Label layoutX="448.0" layoutY="223.0" text="Local Port:">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="533.0" layoutY="220.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="localPortField" disable="true" layoutX="533.0" layoutY="220.0" prefHeight="26.0" prefWidth="106.0" />
       <Label layoutX="449.0" layoutY="272.0" text="Remote IP">
          <font>
             <Font size="14.0" />
@@ -146,8 +140,8 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TextField layoutX="533.0" layoutY="271.0" prefHeight="26.0" prefWidth="106.0" />
-      <TextField layoutX="533.0" layoutY="306.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="remoteIPField" layoutX="533.0" layoutY="271.0" prefHeight="26.0" prefWidth="106.0" />
+      <TextField fx:id="remotePortField" layoutX="533.0" layoutY="306.0" prefHeight="26.0" prefWidth="106.0" />
       <Button layoutX="543.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="85.0" text="Test" />
       <Pane fx:id="onlineUsersPane" layoutX="686.0" layoutY="52.0" prefHeight="418.0" prefWidth="214.0" />
       <Label layoutX="754.0" layoutY="20.0" text="Online Users">

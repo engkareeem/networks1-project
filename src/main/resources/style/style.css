@@ -50,36 +50,37 @@
 /*     Received Message    */
 .receivedMessagePane {
     -fx-padding: 5;
-    -fx-background-color: #79de79;
+    -fx-background-color: green;
     -fx-end-margin: 10px;
-    -fx-background-insets: 0 150px 0 0;
-    -fx-border-insets: 0 150px 0 0;
-    -fx-background-radius: 20px 10px 10px 0;
+
+    -fx-background-insets: 0 0 0 150px;
+    -fx-background-radius: 10px 20px 0 10px;
 }
 .receivedMessagePane .messageContentPane {
-    -fx-alignment: center_left;
+    -fx-alignment: center_right;
 }
 .receivedMessagePane .messageDatePane {
-    -fx-alignment: bottom_left;
+    -fx-alignment: bottom_right;
 }
 /*--------------------------*/
 
 /*         Sent Message      */
 .messageContentPane .messageContentText {
-    -fx-fill: black;
+    -fx-fill: white;
     -fx-font-size: 13px;
     -fx-background-color: yellow;
 }
 
 .sentMessagePane {
     -fx-padding: 5;
-    -fx-background-color: #ff7979;
+    -fx-background-color: #fd4747;
     -fx-end-margin: 10px;
-    -fx-background-insets: 0 0 0 150px;
-    -fx-background-radius: 10px 20px 0 10px;
+    -fx-background-insets: 0 150px 0 0;
+    -fx-border-insets: 0 150px 0 0;
+    -fx-background-radius: 20px 10px 10px 0;
 }
 .sentMessagePane .messageContentPane {
-    -fx-alignment: center_right;
+    -fx-alignment: center_left;
 }
 
 .sentMessagePane .messageContentPane .messageContentText {
@@ -87,6 +88,6 @@
 }
 
 .sentMessagePane .messageDatePane {
-    -fx-alignment: bottom_right;
+    -fx-alignment: bottom_left;
 }
 /*---------------------------------*/

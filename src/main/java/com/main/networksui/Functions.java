@@ -46,8 +46,8 @@ public class Functions {
         messagePane.getStyleClass().add(sent ? "sentMessagePane":"receivedMessagePane");
         textStackPane.getChildren().add(messageText);
 
-        messageHBox.getChildren().add(sent ? dateStackPane:textStackPane);
         messageHBox.getChildren().add(sent ? textStackPane:dateStackPane);
+        messageHBox.getChildren().add(sent ? dateStackPane:textStackPane);
 
         messagePane.getChildren().add(messageHBox);
         chatVBox.getChildren().add(messagePane);
