@@ -62,6 +62,10 @@
 .receivedMessagePane .messageDatePane {
     -fx-alignment: bottom_right;
 }
+.receivedMessagePane .messageContentPane .messageContentText {
+    -fx-text-alignment: right;
+}
+
 /*--------------------------*/
 
 /*         Sent Message      */
@@ -84,7 +88,7 @@
 }
 
 .sentMessagePane .messageContentPane .messageContentText {
-    -fx-text-alignment: right;
+    -fx-text-alignment: left;
 }
 
 .sentMessagePane .messageDatePane {
