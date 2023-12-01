@@ -25,7 +25,7 @@ public class Functions {
     public static void addMessage(String text, boolean sent) {
 
         VBox chatVBox = (VBox) Controller.currentStage.getScene().lookup("#chatVBox");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a"); // DD for date, E for day name
+        SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a"); // DD for date, E for day name
         Pane messagePane = new Pane();
         HBox messageHBox = new HBox();
         StackPane textStackPane = new StackPane();
@@ -84,5 +84,6 @@ public class Functions {
         buf = message.getBytes();
         DatagramPacket DpSend = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip), port);
         ds.send(DpSend);
+
     }
 }

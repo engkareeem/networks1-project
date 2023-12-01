@@ -1,6 +1,7 @@
 package com.main.networksui;
 
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -57,7 +58,7 @@ public class Controller implements Initializable {
                     if(newValue.length() > 4) {
                         localPortField.setText(oldValue);
                     }
-                } else {
+                } else if(!newValue.isEmpty()) {
                     ReceiverUDP.updatePort(Integer.parseInt(newValue));
                 }
         });
@@ -75,7 +76,7 @@ public class Controller implements Initializable {
         vBox.setId("chatVBox");
         chatPane.setContent(vBox);
         Functions.getInterfaces();
-        new Thread(ReceiverUDP::receiveUDP).start(); // Start the udp listener with 1234 as default port
+        ReceiverUDP.init();
     }
 
     void changeStatus(String text) {
@@ -92,6 +93,12 @@ public class Controller implements Initializable {
                 try {
                     Functions.sendUDP(message, ip, port);
                     chatField.clear();
+                    Platform.runLater(new Runnable() {
+                        @Override
+                        public void run() {
+                            Functions.addMessage(message,true);
+                        }
+                    });
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
