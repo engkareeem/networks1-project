@@ -34,11 +34,18 @@ public class Controller implements Initializable {
         vBox.setId("chatVBox");
         chatPane.setContent(vBox);
 
-        Platform.runLater(() -> {
-            Functions.addMessage("Hello nigga",true);
-            Functions.addMessage("Hi hau??",false);
-        });
-
+        new Thread(() -> {
+            while(true) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Platform.runLater(() -> {
+                    Functions.addMessage("Hi hau??",true);
+                });
+            }
+        }).start();
     }
 
 
