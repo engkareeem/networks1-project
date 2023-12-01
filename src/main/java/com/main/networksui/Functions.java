@@ -61,6 +61,7 @@ public class Functions {
 
             Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
 
+
             while (networkInterfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = networkInterfaces.nextElement();
                 if(networkInterface.getInetAddresses().hasMoreElements()){

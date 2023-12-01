@@ -58,6 +58,7 @@ public class Controller implements Initializable {
                     if(newValue.length() > 4) {
                         localPortField.setText(oldValue);
                     }
+
                 } else if(!newValue.isEmpty()) {
                     ReceiverUDP.updatePort(Integer.parseInt(newValue));
                 }
