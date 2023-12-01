@@ -1,5 +1,6 @@
 package com.main.networksui;
 
+import javafx.application.Platform;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -11,9 +12,12 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.io.IOException;
+import java.net.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.Enumeration;
 
 public class Functions {
 
@@ -47,6 +51,31 @@ public class Functions {
 
         messagePane.getChildren().add(messageHBox);
         chatVBox.getChildren().add(messagePane);
+    }
+
+    public static void getInterfaces(){
+        try {
+
+            Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+            while (networkInterfaces.hasMoreElements()) {
+                NetworkInterface networkInterface = networkInterfaces.nextElement();
+
+                if (networkInterface.getName().startsWith("wlan")) {
+
+                    Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
+
+
+                    while (inetAddresses.hasMoreElements()) {
+                        InetAddress inetAddress = inetAddresses.nextElement();
+
+
+                        System.out.println("Name: " + networkInterface.getName() + ", IP: " + inetAddress.getHostAddress());
+                    }
+                }
+            }
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void sendUDP(String message,String ip, int port) throws IOException {

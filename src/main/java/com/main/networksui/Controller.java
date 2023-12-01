@@ -50,33 +50,23 @@ public class Controller implements Initializable {
         vBox.getStyleClass().add("chatVBox");
         vBox.setId("chatVBox");
         chatPane.setContent(vBox);
-
-        new Thread(() -> {
-            while(true) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                Platform.runLater(() -> {
-                    Functions.addMessage("Hi hau??",true);
-                });
-            }
-        }).start();
+//        Functions.getInterfaces();
+        new Thread(ReceiverUDP::receiveUDP).start(); // Start the udp listener with 1234 as default port
     }
 
-    public void sendButtonClicked(ActionEvent event) {
+    public void sendButtonClicked() {
         if(!chatField.getText().isEmpty() && !serverIPField.getText().isEmpty() && !serverPortField.getText().isEmpty()) {
             String message = chatField.getText();
             String ip = serverIPField.getText();
             int port = Integer.parseInt(serverPortField.getText());
             new Thread((() -> {
                 try {
+
                     Functions.sendUDP(message, ip, port);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }));
+            })).start();
         }
     }
 
