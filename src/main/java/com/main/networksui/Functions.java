@@ -15,6 +15,7 @@ import java.net.SocketException;
 import java.io.IOException;
 import java.net.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.Enumeration;
@@ -24,7 +25,7 @@ public class Functions {
     public static void addMessage(String text, boolean sent) {
 
         VBox chatVBox = (VBox) Controller.currentStage.getScene().lookup("#chatVBox");
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a"); // DD for date, E for day name
         Pane messagePane = new Pane();
         HBox messageHBox = new HBox();
         StackPane textStackPane = new StackPane();
@@ -53,29 +54,28 @@ public class Functions {
         chatVBox.getChildren().add(messagePane);
     }
 
-    public static void getInterfaces(){
+    public static ArrayList<String> getInterfaces(){
+        ArrayList<String> interfaces = new ArrayList<>();
+
         try {
 
             Enumeration<NetworkInterface> networkInterfaces = NetworkInterface.getNetworkInterfaces();
+
             while (networkInterfaces.hasMoreElements()) {
                 NetworkInterface networkInterface = networkInterfaces.nextElement();
-
-                if (networkInterface.getName().startsWith("wlan")) {
-
-                    Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses();
-
-
-                    while (inetAddresses.hasMoreElements()) {
-                        InetAddress inetAddress = inetAddresses.nextElement();
-
-
-                        System.out.println("Name: " + networkInterface.getName() + ", IP: " + inetAddress.getHostAddress());
+                if(networkInterface.getInetAddresses().hasMoreElements()){
+                    String interfaceAddress = networkInterface.getInetAddresses().nextElement().getHostAddress();
+                    String name = networkInterface.getName().replaceAll("wlan\\d*", "Wi-Fi").replaceAll("lo\\d*", "LocalHost").replaceAll("eth\\d*", "Ethernet");
+                    if(interfaceAddress.matches("\\d+.\\d+.\\d+.\\d+")){
+                        interfaces.add(name + ": " + interfaceAddress);
                     }
                 }
+
             }
         } catch (SocketException e) {
             e.printStackTrace();
         }
+        return interfaces;
     }
 
     public static void sendUDP(String message,String ip, int port) throws IOException {

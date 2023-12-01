@@ -41,6 +41,9 @@ public class ReceiverUDP {
                 throw new RuntimeException(e);
             }
             String msg = new String(packet.getData()).trim();
+            if(msg.contains("CMD")){
+//                CMD:deleteID
+            }
 
             Platform.runLater(() -> {
                 Functions.addMessage(msg, false);
@@ -50,5 +53,11 @@ public class ReceiverUDP {
 
         }
     }
+
+    public static void processCommand(String cmd) {
+
+    }
+
+
 
 }

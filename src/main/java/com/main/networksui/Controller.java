@@ -38,7 +38,7 @@ public class Controller implements Initializable {
         vBox.getStyleClass().add("chatVBox");
         vBox.setId("chatVBox");
         chatPane.setContent(vBox);
-//        Functions.getInterfaces();
+        Functions.getInterfaces();
         new Thread(ReceiverUDP::receiveUDP).start(); // Start the udp listener with 1234 as default port
     }
 
