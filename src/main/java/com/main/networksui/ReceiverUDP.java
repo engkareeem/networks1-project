@@ -62,7 +62,6 @@ public class ReceiverUDP {
                 processCommand(msg, ip, port);
                 continue;
             }
-            System.out.println(msg);
             String msgId = msg.split("@")[0];
             String msgBody = msg.split("@")[1];
 

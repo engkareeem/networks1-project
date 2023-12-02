@@ -117,7 +117,10 @@ public class Functions {
     public static void sendUDP(String message,String ip, int port, String id) {
 
         try {
-            message =  ip + "@" + port + "@" + id + "@" + message;
+            String localIp = ((TextField) Controller.currentStage.getScene().lookup("#localIPField")).getText();
+            String localPort = ((TextField) Controller.currentStage.getScene().lookup("#localPortField")).getText();
+            message =  localIp + "@" + localPort + "@" + id + "@" + message;
+
             DatagramSocket ds = new DatagramSocket();
             byte[] buf;
             buf = message.getBytes();
