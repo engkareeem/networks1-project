@@ -23,7 +23,7 @@ public class ReceiverUDP {
     }
 
     public static void init(){
-        mainThread = new Thread(ReceiverUDP::receiveUDP); // Start the udp listener with 1234 as default port
+        mainThread = new Thread(ReceiverUDP::receiveUDP);
         mainThread.start();
     }
 
@@ -80,7 +80,7 @@ public class ReceiverUDP {
             // TODO: delete a msg
             String id = cmd.split("@")[0];
             Functions.deleteMessage(id);
-            Functions.changeStatus("Message deleted by", ip, port);
+            Functions.changeStatus("A Message deleted by", ip, port);
         }else if(cmd.contains("deleteAll@")){
             //TODO: delete all user message
             Functions.deleteAllMessages();
