@@ -2,6 +2,7 @@ package com.main.networksui;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -71,6 +72,10 @@ public class Functions {
         messagePane.getChildren().add(messageHBox);
         chatVBox.getChildren().add(messagePane);
     }
+    public static void changeStatus(String text, String ip, String port) {
+        TextArea textArea = (TextArea) Controller.currentStage.getScene().lookup("#statusArea");
+        textArea.setText(text + " IP = " + ip + ", Port = " + port);
+    }
     public static void deleteMessage(String msgID) {
         try {
             VBox vBox = (VBox) (Controller.currentStage.getScene().lookup("#chatVBox"));
@@ -112,12 +117,18 @@ public class Functions {
     public static void sendUDP(String message,String ip, int port, String id) {
 
         try {
-            message = id + "@" + ip + "@" + port + "@" + message;
+            message =  ip + "@" + port + "@" + id + "@" + message;
             DatagramSocket ds = new DatagramSocket();
             byte[] buf;
             buf = message.getBytes();
             DatagramPacket DpSend = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip), port);
             ds.send(DpSend);
+            if(message.contains("CMD")){
+                Functions.changeStatus("Sent a command to", ip, String.valueOf(port));
+            }else {
+                Functions.changeStatus("Sent a message to", ip, String.valueOf(port));
+
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -82,9 +82,6 @@ public class Controller implements Initializable {
         ReceiverUDP.init();
     }
 
-    void changeStatus(String text) {
-        statusArea.setText(text);
-    }
 
 
     public void sendButtonClicked() {
