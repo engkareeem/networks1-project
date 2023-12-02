@@ -109,5 +109,6 @@
 
 .sentMessagePane .messageDatePane {
     -fx-alignment: bottom_left;
+    -fx-padding: 0 5px 0 20px;
 }
 /*---------------------------------*/

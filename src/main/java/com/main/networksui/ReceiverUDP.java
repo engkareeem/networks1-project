@@ -71,7 +71,8 @@ public class ReceiverUDP {
     public static void processCommand(String cmd) {
         if(cmd.contains("delete@")){
             // TODO: delete a msg
-            String id = cmd.split("@")[1];
+            String id = cmd.split("@")[2];
+            Functions.deleteMessage(id);
         }else if(cmd.contains("deleteAll")){
             //TODO: delete all user message
         }

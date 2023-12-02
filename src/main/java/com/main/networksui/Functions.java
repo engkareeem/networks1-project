@@ -67,7 +67,13 @@ public class Functions {
         chatVBox.getChildren().add(messagePane);
     }
     public static void deleteMessage(String id) {
-        System.out.println(id);
+        try {
+            VBox vBox = (VBox) (Controller.currentStage.getScene().lookup("#chatVBox"));
+            vBox.getChildren().remove(vBox.lookup("#" + id));
+        } catch (Exception e) {
+            System.out.println("Error occurred while deleting message pane");
+        }
+
     }
 
     public static ArrayList<String> getInterfaces(){
