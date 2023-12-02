@@ -91,18 +91,14 @@ public class Controller implements Initializable {
             String ip = remoteIPField.getText();
             int port = Integer.parseInt(remotePortField.getText());
             new Thread(() -> {
-                try {
-                    Functions.sendUDP(message, ip, port);
-                    chatField.clear();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            Functions.addMessage(message,true);
-                        }
-                    });
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                Functions.sendUDP(message, ip, port);
+                chatField.clear();
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        Functions.addMessage(message,true);
+                    }
+                });
             }).start();
         }
     }

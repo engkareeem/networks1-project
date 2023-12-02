@@ -2,6 +2,7 @@ package com.main.networksui;
 
 import javafx.application.Platform;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -36,7 +37,8 @@ public class Functions {
         Text messageDate = new Text();
         Button deleteMessageButton = new Button();
 
-        messageHBox.setId(timestamp.toString());
+        String timestampID = timestamp.toString();
+        messageHBox.setId(timestampID);
 
 
         deleteMessageButton.setOnAction(event -> {
@@ -66,14 +68,17 @@ public class Functions {
         messagePane.getChildren().add(messageHBox);
         chatVBox.getChildren().add(messagePane);
     }
-    public static void deleteMessage(String id) {
+    public static void deleteMessage(String msgID) {
+        String ip = ((TextField) Controller.currentStage.getScene().lookup("#remoteIPField")).getText();
+        String port = ((TextField) Controller.currentStage.getScene().lookup("#remotePortField")).getText();
+
+        sendUDP("CMD@delete@" + msgID, ip, Integer.parseInt(port));
         try {
             VBox vBox = (VBox) (Controller.currentStage.getScene().lookup("#chatVBox"));
-            vBox.getChildren().remove(vBox.lookup("#" + id));
+            vBox.getChildren().remove(vBox.lookup("#" + msgID));
         } catch (Exception e) {
             System.out.println("Error occurred while deleting message pane");
         }
-
     }
 
     public static ArrayList<String> getInterfaces(){
@@ -101,12 +106,17 @@ public class Functions {
         return interfaces;
     }
 
-    public static void sendUDP(String message,String ip, int port) throws IOException {
-        DatagramSocket ds = new DatagramSocket();
-        byte[] buf;
-        buf = message.getBytes();
-        DatagramPacket DpSend = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip), port);
-        ds.send(DpSend);
+    public static void sendUDP(String message,String ip, int port) {
+
+        try {
+            DatagramSocket ds = new DatagramSocket();
+            byte[] buf;
+            buf = message.getBytes();
+            DatagramPacket DpSend = new DatagramPacket(buf, buf.length, InetAddress.getByName(ip), port);
+            ds.send(DpSend);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
