@@ -24,8 +24,7 @@ import java.util.Enumeration;
 
 public class Functions {
 
-    public static void addMessage(String text, boolean sent) {
-
+    public static void addMessage(String text, boolean sent, String id) {
         Long timestamp = new Date().getTime();
         VBox chatVBox = (VBox) Controller.currentStage.getScene().lookup("#chatVBox");
         SimpleDateFormat dateFormat = new SimpleDateFormat("h:mm a"); // DD for date, E for day name
@@ -37,12 +36,16 @@ public class Functions {
         Text messageDate = new Text();
         Button deleteMessageButton = new Button();
 
-        String timestampID = timestamp.toString();
-        messageHBox.setId(timestampID);
+
+        messagePane.setId("message" + id);
 
 
         deleteMessageButton.setOnAction(event -> {
-            Functions.deleteMessage(messageHBox.getId());
+            String ip = ((TextField) Controller.currentStage.getScene().lookup("#remoteIPField")).getText();
+            String port = ((TextField) Controller.currentStage.getScene().lookup("#remotePortField")).getText();
+
+            sendUDP("CMD@delete@", ip, Integer.parseInt(port),id);
+            Functions.deleteMessage(id);
         });
 
         deleteMessageButton.getStyleClass().add("deleteMessageButton");
@@ -69,15 +72,15 @@ public class Functions {
         chatVBox.getChildren().add(messagePane);
     }
     public static void deleteMessage(String msgID) {
-        String ip = ((TextField) Controller.currentStage.getScene().lookup("#remoteIPField")).getText();
-        String port = ((TextField) Controller.currentStage.getScene().lookup("#remotePortField")).getText();
-
-        sendUDP("CMD@delete@" + msgID, ip, Integer.parseInt(port));
         try {
             VBox vBox = (VBox) (Controller.currentStage.getScene().lookup("#chatVBox"));
-            vBox.getChildren().remove(vBox.lookup("#" + msgID));
+            Pane messagePane = (Pane) vBox.lookup("#message" + msgID);
+            Platform.runLater(() -> {
+                vBox.getChildren().remove(messagePane);
+            });
         } catch (Exception e) {
-            System.out.println("Error occurred while deleting message pane");
+            System.out.println("Error occurred while deleting message pane ");
+            e.printStackTrace();
         }
     }
 
@@ -106,9 +109,10 @@ public class Functions {
         return interfaces;
     }
 
-    public static void sendUDP(String message,String ip, int port) {
+    public static void sendUDP(String message,String ip, int port, String id) {
 
         try {
+            message = id + "@" + ip + "@" + port + "@" + message;
             DatagramSocket ds = new DatagramSocket();
             byte[] buf;
             buf = message.getBytes();

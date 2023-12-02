@@ -60,7 +60,7 @@ public class ReceiverUDP {
             }
 
             Platform.runLater(() -> {
-                Functions.addMessage(msg, false);
+                Functions.addMessage(msg.split("@")[1], false,msg.split("@")[0]); // TODO: There is an id
 
             });
             receiveArray = new byte[65535];
@@ -71,7 +71,7 @@ public class ReceiverUDP {
     public static void processCommand(String cmd) {
         if(cmd.contains("delete@")){
             // TODO: delete a msg
-            String id = cmd.split("@")[2];
+            String id = cmd.split("@")[0];
             Functions.deleteMessage(id);
         }else if(cmd.contains("deleteAll")){
             //TODO: delete all user message

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
@@ -40,6 +41,7 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         /* Events */
         TextField []numericFields = {remotePortField,TCPServerPortField};
         for(TextField tf:numericFields) {
@@ -91,17 +93,25 @@ public class Controller implements Initializable {
             String ip = remoteIPField.getText();
             int port = Integer.parseInt(remotePortField.getText());
             new Thread(() -> {
-                Functions.sendUDP(message, ip, port);
+                String id = generateMessageID();
+                Functions.sendUDP(message, ip, port, id);
                 chatField.clear();
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        Functions.addMessage(message,true);
+
+                        Functions.addMessage(message,true, id); // TODO: There is an id
                     }
                 });
             }).start();
         }
     }
+
+    String generateMessageID() {
+        Long timestamp = new Date().getTime();
+        return timestamp.toString();
+    }
+
 
     public void interfacesComboBoxOnChanged() {
         String selected = interfacesComboBox.getSelectionModel().getSelectedItem();
