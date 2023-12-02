@@ -2,6 +2,7 @@ package com.main.networksui;
 
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -114,6 +115,14 @@ public class Controller implements Initializable {
         String selected = interfacesComboBox.getSelectionModel().getSelectedItem();
         String ip = selected.split(": ")[1];
         localIPField.setText(ip);
+    }
+
+    public void deleteAllButtonClicked(ActionEvent e) {
+        Functions.deleteAllMessages();
+        String ip = ((TextField) Controller.currentStage.getScene().lookup("#remoteIPField")).getText();
+        String port = ((TextField) Controller.currentStage.getScene().lookup("#remotePortField")).getText();
+        Functions.sendUDP("CMD@deleteAll@", ip, Integer.parseInt(port),"");
+
     }
 
 

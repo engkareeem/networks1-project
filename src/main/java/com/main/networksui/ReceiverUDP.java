@@ -81,8 +81,9 @@ public class ReceiverUDP {
             String id = cmd.split("@")[0];
             Functions.deleteMessage(id);
             Functions.changeStatus("Message deleted by", ip, port);
-        }else if(cmd.contains("deleteAll")){
+        }else if(cmd.contains("deleteAll@")){
             //TODO: delete all user message
+            Functions.deleteAllMessages();
             Functions.changeStatus("All messages deleted by", ip, port);
 
         }

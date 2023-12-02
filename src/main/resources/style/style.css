@@ -52,6 +52,14 @@
 }
 
 
+#deleteAllButton {
+    -fx-background-image: url("../img/delete.png");
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+}
 
 /*    Timestamp       */
 .messageDatePane {

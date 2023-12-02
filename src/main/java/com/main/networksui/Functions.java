@@ -89,6 +89,14 @@ public class Functions {
         }
     }
 
+    public static void deleteAllMessages() {
+        Platform.runLater(() -> {
+            VBox vbox = (VBox) Controller.currentStage.getScene().lookup("#chatVBox");
+            vbox.getChildren().clear();
+        });
+
+    }
+
     public static ArrayList<String> getInterfaces(){
         ArrayList<String> interfaces = new ArrayList<>();
 
