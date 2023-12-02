@@ -69,10 +69,10 @@ public class ReceiverUDP {
     }
 
     public static void processCommand(String cmd) {
-        if(cmd.contains("delete-")){
+        if(cmd.contains("delete@")){
             // TODO: delete a msg
-            String id = cmd.split("-")[1];
-        }else if(cmd.contains("deleteAll-")){
+            String id = cmd.split("@")[1];
+        }else if(cmd.contains("deleteAll")){
             //TODO: delete all user message
         }
     }
