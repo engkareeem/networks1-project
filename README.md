@@ -31,17 +31,11 @@ To set up the Network Chatting App locally, follow these steps:
 
 Once the server is running and clients are connected, users can log in, view online users, select recipients, send messages, delete chat history, and perform other actions based on their assigned roles and permissions. Admins can monitor user activity, manage user accounts, and configure application settings through the admin panel.
 
-## Support
-
-For any questions or assistance, feel free to contact our support team at [support@example.com](mailto:support@example.com).
 
 ## Contributing
 
 We welcome contributions from the community! If you have ideas for new features, improvements, or bug fixes, please submit a pull request. Before making significant changes, consider opening an issue to discuss the proposed modifications.
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
 
